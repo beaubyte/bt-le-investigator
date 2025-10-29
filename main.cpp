@@ -1,5 +1,7 @@
 #include <QCoreApplication>
 #include "main.h"
+#include "discovery.h"
+#include "discoverer.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -35,6 +37,8 @@ int main(int argc, char *argv[])
     for (int i = 0; i < remotes.length(); i++){
         qInfo() << "Found: " << remotes[i].toString();
     }
+    Discovery *discovery = new Discovery();
+    Discoverer *discoverer = new Discoverer();
 
     return a.exec();
 }

@@ -1,5 +1,10 @@
 #include "discoverer.h"
 
-discoverer::discoverer(QObject *parent)
+Discoverer::Discoverer(QObject *parent)
     : QObject{parent}
 {}
+
+void Discoverer::addDeviceDiscovered(const QBluetoothDeviceInfo &info)
+{
+
+}
