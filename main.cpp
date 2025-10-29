@@ -38,17 +38,9 @@ int main(int argc, char *argv[])
         qInfo() << "Found: " << remotes[i].toString();
     }
     Discovery *discovery = new Discovery();
-    Discoverer *discoverer = new Discoverer();
+    discovery->startDeviceDiscovery();
 
     return a.exec();
 }
-/*
-void discovery::startDeviceDiscovery() {
-    QBluetoothDeviceDiscoveryAgent *btDiscoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
-    connect(btDiscoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
-            this, SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
-    btDiscoveryAgent->start();
-};
-*/
 
 
