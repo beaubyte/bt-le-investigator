@@ -15,6 +15,16 @@ int main(int argc, char *argv[])
     // If you do not need a running Qt event loop, remove the call
     // to a.exec() or use the Non-Qt Plain C++ Application template.
     qInfo() << "Initializing the application\n";
-    m_deviceDiscoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
+    QBluetoothLocalDevice localDevice;
+    QString localDeviceName;
+
+    if (localDevice.isValid()) {
+        localDevice.powerOn();
+        localDeviceName = localDevice.name();
+        localDevice.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
+        QList<QBluetoothAddress> remotes;
+        remotes = localDevice.connectedDevices();
+    }
+
     return a.exec();
 }
