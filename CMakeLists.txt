@@ -14,9 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth)
 
 add_executable(bt-le-investigator
   main.cpp
-  main.h
+
   discovery.h discovery.cpp
-  discoverer.h discoverer.cpp
+
 
 
 )

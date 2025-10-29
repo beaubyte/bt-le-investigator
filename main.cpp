@@ -1,7 +1,8 @@
 #include <QCoreApplication>
-#include "main.h"
+#include <QBluetoothPermission>
+#include <QBluetoothLocalDevice>
+#include <QBluetoothDeviceDiscoveryAgent>
 #include "discovery.h"
-#include "discoverer.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
