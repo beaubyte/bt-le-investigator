@@ -14,7 +14,11 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth)
 
 add_executable(bt-le-investigator
   main.cpp
-  BluetoothControl.h
+  main.h
+  discovery.h discovery.cpp
+  discoverer.h discoverer.cpp
+
+
 )
 target_link_libraries(bt-le-investigator Qt${QT_VERSION_MAJOR}::Core Qt6::Bluetooth)
 include(GNUInstallDirs)

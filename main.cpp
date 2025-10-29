@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "BluetoothControl.h"
+#include "main.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -28,12 +28,23 @@ int main(int argc, char *argv[])
         qInfo() << "Using interface " << localDeviceName;
         localDevice.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
         remotes = localDevice.connectedDevices();
+    } else {
+        qWarning() << "Failed to connect to Bluetooth";
     }
-    qInfo() << remotes.length();
+    qInfo() << "Number of connected devices: " << remotes.length();
     for (int i = 0; i < remotes.length(); i++){
         qInfo() << "Found: " << remotes[i].toString();
     }
 
-
     return a.exec();
 }
+/*
+void discovery::startDeviceDiscovery() {
+    QBluetoothDeviceDiscoveryAgent *btDiscoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
+    connect(btDiscoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
+            this, SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
+    btDiscoveryAgent->start();
+};
+*/
+
+
