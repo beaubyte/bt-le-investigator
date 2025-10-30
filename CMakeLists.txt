@@ -16,6 +16,7 @@ add_executable(bt-le-investigator
   main.cpp
 
   discovery.h discovery.cpp
+  devicebox.h devicebox.cpp
 
 
 

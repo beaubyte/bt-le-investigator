@@ -4,6 +4,7 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QObject>
+#include "devicebox.h"
 
 class Discovery : public QObject
 {
@@ -17,6 +18,8 @@ public slots:
     void concludeScan();
 signals:
 
+private:
+    devicebox deviceList;
 };
 
 #endif // DISCOVERY_H
