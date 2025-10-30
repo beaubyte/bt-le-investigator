@@ -14,6 +14,7 @@ public:
 
 public slots:
     void addDeviceDiscovered(const QBluetoothDeviceInfo &info);
+    void concludeScan();
 signals:
 
 };
