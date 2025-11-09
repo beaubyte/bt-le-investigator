@@ -2,7 +2,6 @@
 Discovery::Discovery(QObject *parent)
     : QObject{parent}
 {}
-
 // step 1: look for nearby devices
 void Discovery::startDeviceDiscovery(){
     QBluetoothDeviceDiscoveryAgent *discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);

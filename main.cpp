@@ -2,6 +2,7 @@
 #include <QBluetoothPermission>
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
+#include <QSqlDatabase>
 #include "discovery.h"
 int main(int argc, char *argv[])
 {
@@ -10,7 +11,13 @@ int main(int argc, char *argv[])
     qInfo() << "Initializing the application";
     QBluetoothLocalDevice localDevice;
     QString localDeviceName;
-
+    qInfo() << "Connecting to the database server";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    db.setHostName("recprism");
+    db.setDatabaseName("investigator");
+    db.setUserName("oskar");
+    db.setPassword("TheDayWeMet");
+    bool ok = db.open();
     QList<QBluetoothAddress> remotes;
     // please connect to me to the local bluetooth device :3
     if (localDevice.isValid()) {
