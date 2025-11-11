@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "discovery.h"
+#include "macdatabase.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -13,16 +14,12 @@ int main(int argc, char *argv[])
     QBluetoothLocalDevice localDevice;
     QString localDeviceName;
     qInfo() << "Connecting to the database server";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("prism.panda-mirach.ts.net");
-    db.setDatabaseName("investigator");
-    db.setUserName("testuser");
-    db.setPassword("TheDayWeMet"); // production version will use offuscated password
-
-    bool ok = db.open();
+    macdatabase db;
+    bool ok = db.connectDatabase();
     if (ok) {
         qInfo() << "Connected to database successfully!";
-        QSqlQuery query("select macaddress, friendlyname from bluetooth.findable");
+        QString queryText = "select macaddress, friendlyname from bluetooth.findable";
+        QSqlQuery query = db.dbquery(queryText);
         if (query.first() == true){
             while (query.next()) {
                 QString macaddress = query.value(0).toString();
