@@ -4,6 +4,7 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QObject>
+#include <QDateTime>
 
 class devicebox : public QObject
 {
@@ -12,6 +13,7 @@ public:
     explicit devicebox(QObject *parent = nullptr);
     void appendDevice(QBluetoothDeviceInfo q);
     void listCapturedMACs();
+    QList<QBluetoothDeviceInfo> getList();
 signals:
 
 private:

@@ -5,21 +5,24 @@
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QObject>
 #include "devicebox.h"
+#include "macdatabase.h"
 
 class Discovery : public QObject
 {
     Q_OBJECT
 public:
     explicit Discovery(QObject *parent = nullptr);
-    void startDeviceDiscovery();
+    void startDeviceDiscovery(macdatabase*);
 
 public slots:
     void addDeviceDiscovered(const QBluetoothDeviceInfo &info);
     void concludeScan();
+    QVector<QVector<QString>> getDevices();
 signals:
 
 private:
     devicebox deviceList;
+    macdatabase* db;
 };
 
 #endif // DISCOVERY_H

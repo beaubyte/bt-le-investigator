@@ -3,14 +3,13 @@ Discovery::Discovery(QObject *parent)
     : QObject{parent}
 {}
 // step 1: look for nearby devices
-void Discovery::startDeviceDiscovery(){
+void Discovery::startDeviceDiscovery(macdatabase* btdb){
     QBluetoothDeviceDiscoveryAgent *discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
     discoveryAgent->setLowEnergyDiscoveryTimeout(30000); // this is just for testing
     connect(discoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)), this, SLOT(addDeviceDiscovered(QBluetoothDeviceInfo)));
     connect(discoveryAgent, SIGNAL(finished()), this, SLOT(concludeScan()));
     connect(discoveryAgent, SIGNAL(cancelled()), this, SLOT(concludeScan()));
-
-    // im gonna start this discovery so hard
+    db = btdb;
     discoveryAgent->start();
 }
 
@@ -26,5 +25,17 @@ void Discovery::addDeviceDiscovered(const QBluetoothDeviceInfo &device){
 void Discovery::concludeScan(){
     qInfo() << "Scan has ended";
     deviceList.listCapturedMACs();
-    QCoreApplication:exit(0);
+
+}
+
+QVector<QVector<QString>> Discovery::getDevices(){
+    QDateTime now = QDateTime::currentDateTime();
+    QList<QBluetoothDeviceInfo> list = deviceList.getList();
+    QVector<QVector<QString>> btInfo;
+    for (int i = 0; i < list.length(); i++){
+        btInfo[i][0] = list[i].address().toString();
+        btInfo[i][1] = list[i].name();
+        btInfo[i][2] = now.currentDateTime().toString();
+    }
+    return btInfo;
 }

@@ -9,8 +9,13 @@ void devicebox::appendDevice(QBluetoothDeviceInfo q){
 }
 
 void devicebox::listCapturedMACs(){
+    QDateTime now = QDateTime::currentDateTime();
     qInfo() << "Devices of note captured: ";
     for (int i = 0; i < targetDeviceList.length(); i++){
-        qInfo() << targetDeviceList[i].name() << " - " << targetDeviceList[i].address().toString();
+        qInfo() << targetDeviceList[i].name() << " - " << targetDeviceList[i].address().toString() << " - " << now;
     }
+}
+
+QList<QBluetoothDeviceInfo> devicebox::getList(){
+    return targetDeviceList;
 }

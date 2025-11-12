@@ -4,15 +4,19 @@
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QTextStream>
 #include "discovery.h"
 #include "macdatabase.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-
     qInfo() << "Initializing the application";
     QBluetoothLocalDevice localDevice;
     QString localDeviceName;
+    QTextStream stream(stdin);
+    QString host;
+    qInfo() << "Where is the device being deployed? (CTRL+D to finish)";
+    while (stream.readLineInto(&host));
     qInfo() << "Connecting to the database server";
     macdatabase db;
     bool ok = db.connectDatabase();
@@ -33,7 +37,7 @@ int main(int argc, char *argv[])
         qWarning() << "!! Failed to connect to database";
     }
 
-
+    // --------------------- reads local bluetooth as test ---------------------
     QList<QBluetoothAddress> remotes;
     // please connect to me to the local bluetooth device :3
     if (localDevice.isValid()) {
@@ -50,8 +54,10 @@ int main(int argc, char *argv[])
     for (int i = 0; i < remotes.length(); i++){
         qInfo() << "Found: " << remotes[i].toString();
     }
+    // -------------------------------------------------------------------------
+
     Discovery *discovery = new Discovery();
-    discovery->startDeviceDiscovery();
+    discovery->startDeviceDiscovery(&db);
 
     return a.exec();
 }
