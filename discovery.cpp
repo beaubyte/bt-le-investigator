@@ -54,7 +54,7 @@ void Discovery::concludeScan(){
     } else {
         qWarning() << "Failed to insert data: " << eventQuery.lastError();
     }
-    QCoreApplication:exit(0);
+    startDeviceDiscovery(db, hostLocation);
 }
 
 QList<QList<QString>> Discovery::getDevices(){
