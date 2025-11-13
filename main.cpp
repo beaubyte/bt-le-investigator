@@ -13,10 +13,10 @@ int main(int argc, char *argv[])
     qInfo() << "Initializing the application";
     QBluetoothLocalDevice localDevice;
     QString localDeviceName;
-    QTextStream stream(stdin);
+    // QTextStream stream(stdin);
     QString host;
     qInfo() << "Where is the device being deployed? (CTRL+D to finish)";
-    while (stream.readLineInto(&host));
+    // while (stream.readLineInto(&host));
     qInfo() << "Connecting to the database server";
     macdatabase db;
     bool ok = db.connectDatabase();
@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
     // -------------------------------------------------------------------------
 
     Discovery *discovery = new Discovery();
+    // discovery takes in the database you wish to store the found devices as a pointer
     discovery->startDeviceDiscovery(&db);
 
     return a.exec();

@@ -18,24 +18,50 @@ void Discovery::addDeviceDiscovered(const QBluetoothDeviceInfo &device){
     qInfo() << "Found device " << device.name() << " at address " << device.address().toString();
     if (device.address().toString() == "CB:DC:B2:35:34:4D" || device.address().toString() == "E9:2B:38:87:b0:73" || device.address().toString() == "E2:F2:F9:C7:B9:76" || device.address().toString() == "80:E1:26:77:C8:11"){
         qInfo() << "Tracked Tile found!!";
-        deviceList.appendDevice(device);
     }
+    deviceList.appendDevice(device);
     // this needs to be where nearby devices are sent back somehow to a function
 }
 void Discovery::concludeScan(){
     qInfo() << "Scan has ended";
     deviceList.listCapturedMACs();
-
+    QString newEvent;
+    newEvent.append("insert into bluetooth.device_events (macaddress, name, location) values ");
+    QVector<QVector<QString>> devices = getDevices();
+    for (int i = 0; i < devices.length(); i++) {
+        newEvent.append("('");
+        newEvent.append(devices[i][0]);
+        newEvent.append("', '");
+        newEvent.append(devices[i][1]);
+        newEvent.append("', '");
+        newEvent.append("testlocation");
+        if (i < devices.length()-1){
+            newEvent.append("'), ");
+        } else {
+            newEvent.append("');");
+        }
+    }
+    qInfo() << newEvent;
+    QSqlQuery eventQuery;
+    if (eventQuery.exec(newEvent)){
+        qInfo() << "Inserted data";
+    } else {
+        qWarning() << "Failed to insert data: " << eventQuery.lastError();
+    }
+    QCoreApplication:exit(0);
 }
 
-QVector<QVector<QString>> Discovery::getDevices(){
+QList<QList<QString>> Discovery::getDevices(){
     QDateTime now = QDateTime::currentDateTime();
     QList<QBluetoothDeviceInfo> list = deviceList.getList();
-    QVector<QVector<QString>> btInfo;
+    QList<QList<QString>> btInfo(list.length());
+    qInfo() << list.length();
     for (int i = 0; i < list.length(); i++){
-        btInfo[i][0] = list[i].address().toString();
-        btInfo[i][1] = list[i].name();
-        btInfo[i][2] = now.currentDateTime().toString();
+        btInfo[i].append(list[i].address().toString());
+        btInfo[i].append(list[i].name());
+        btInfo[i].append(now.currentDateTime().toString());
+        qInfo() << list[i].address().toString();
     }
+    qInfo() << "test";
     return btInfo;
 }

@@ -4,6 +4,7 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QObject>
+#include <QSqlError>
 #include "devicebox.h"
 #include "macdatabase.h"
 
@@ -17,7 +18,7 @@ public:
 public slots:
     void addDeviceDiscovered(const QBluetoothDeviceInfo &info);
     void concludeScan();
-    QVector<QVector<QString>> getDevices();
+    QList<QList<QString>> getDevices();
 signals:
 
 private:
