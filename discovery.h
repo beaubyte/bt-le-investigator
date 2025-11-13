@@ -13,7 +13,7 @@ class Discovery : public QObject
     Q_OBJECT
 public:
     explicit Discovery(QObject *parent = nullptr);
-    void startDeviceDiscovery(macdatabase*);
+    void startDeviceDiscovery(macdatabase*, QString);
 
 public slots:
     void addDeviceDiscovered(const QBluetoothDeviceInfo &info);
@@ -24,6 +24,7 @@ signals:
 private:
     devicebox deviceList;
     macdatabase* db;
+    QString hostLocation;
 };
 
 #endif // DISCOVERY_H
