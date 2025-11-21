@@ -4,13 +4,14 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSettings>
 
 class macdatabase : public QObject
 {
     Q_OBJECT
 public:
     explicit macdatabase(QObject *parent = nullptr);
-    bool connectDatabase();
+    bool connectDatabase(QSettings*, QString);
     QSqlQuery dbquery(QString);
 private:
     QSqlDatabase db;
