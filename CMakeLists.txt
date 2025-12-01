@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth Sql)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Bluetooth Sql)
 
 add_executable(bt-le-investigator
   main.cpp
