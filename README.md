@@ -32,3 +32,5 @@ Afterwards, the program will ask for attributes of your database. These will be 
 The program assumes a database exists with this schema:
 
 [[docs/database_structure.png]]
+
+The schema must be called bluetooth, as part of the investigator table
