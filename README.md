@@ -31,4 +31,4 @@ Afterwards, the program will ask for attributes of your database. These will be 
 
 The program assumes a database exists with this schema:
 
-![[docs/database_structure.png]]
+[[docs/database_structure.png]]
