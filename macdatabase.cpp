@@ -3,7 +3,7 @@
 macdatabase::macdatabase(QObject *parent)
     : QObject{parent}
 {}
-
+// contains the logic for connecting to the database using stored QSettings and a passed QString
 bool macdatabase::connectDatabase(QSettings* settings, QString password){
     db = QSqlDatabase::addDatabase("QPSQL");
     db.setHostName(settings->value("db/host").toString());

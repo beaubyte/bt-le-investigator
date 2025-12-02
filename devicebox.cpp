@@ -4,10 +4,12 @@ devicebox::devicebox(QObject *parent)
     : QObject{parent}
 {}
 
+// adds a new device to the box
 void devicebox::appendDevice(QBluetoothDeviceInfo q){
     targetDeviceList.append(q);
 }
 
+// lists the captured MAC addresses of the devices in the scan to the terminal for debug purposes
 void devicebox::listCapturedMACs(){
     QDateTime now = QDateTime::currentDateTime();
     qInfo() << "Devices of note captured: ";

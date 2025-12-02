@@ -10,6 +10,7 @@
 #include "macdatabase.h"
 int main(int argc, char *argv[])
 {
+    // application starts and creates all the variables and objects
     QCoreApplication a(argc, argv);
     qDebug() << "Initializing the application";
     QSettings settings("bt-investigator","beaubyte");
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
             settings.remove("db/username");
         }
     }
-
+    // asks for database information if configuration does not exist
     qInfo() << "Connecting to the database server";
     macdatabase db;
     if (!(settings.contains("db/host"))){
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
     qInfo() << "What is the password to access the database?";
     QString password = stream.readLine();
 
+    // begins to connect to database
     bool ok = db.connectDatabase(&settings, password);
     if (ok) {
         qInfo() << "Connected to database successfully!";
@@ -71,6 +73,7 @@ int main(int argc, char *argv[])
     }
 
     // --------------------- reads local bluetooth for debug purposes ---------------------
+    // this is not super important, but if a bluetooth device is paired, it can still show up on the scan
     QList<QBluetoothAddress> remotes;
     // please connect to me to the local bluetooth device :3
     if (localDevice.isValid()) {

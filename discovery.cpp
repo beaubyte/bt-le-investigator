@@ -15,7 +15,7 @@ void Discovery::startDeviceDiscovery(macdatabase* btdb, QString hostname){
     discoveryAgent->start();
 }
 
-// step 2: check if the devices are tiles, if they are: add them
+// step 2: add device discovered to the devicelist
 void Discovery::addDeviceDiscovered(const QBluetoothDeviceInfo &device){
     qDebug() << "Found device " << device.name() << " at address " << device.address().toString();
     /*
@@ -26,6 +26,7 @@ void Discovery::addDeviceDiscovered(const QBluetoothDeviceInfo &device){
     deviceList.appendDevice(device);
     // this needs to be where nearby devices are sent back somehow to a function
 }
+// step 3: when scan has concluded, build an sql statement and submit it to the database
 void Discovery::concludeScan(){
     qInfo() << "Scan has ended";
     deviceList.listCapturedMACs();
@@ -57,6 +58,7 @@ void Discovery::concludeScan(){
     startDeviceDiscovery(db, hostLocation);
 }
 
+// This function gets the devices from a the device list, and returns a 2D QList to Stringify the data
 QList<QList<QString>> Discovery::getDevices(){
     QDateTime now = QDateTime::currentDateTime();
     QList<QBluetoothDeviceInfo> list = deviceList.getList();
