@@ -33,4 +33,4 @@ The program assumes a database exists with this schema:
 
 [[docs/database_structure.png]]
 
-The schema must be called bluetooth, as part of the investigator table. A file with the schema called `investigator-schema.sql` has been included to help with the construction of the database. Replace `[user]` with the user in your PostgreSQL database with permissions to insert and delete from the database.
+The schema must be called bluetooth. A file with the schema called `investigator-schema.sql` has been included to help with the construction of the database. Replace `[user]` with the user in your PostgreSQL database with permissions to insert and delete from the database.
